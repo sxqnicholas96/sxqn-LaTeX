@@ -2,10 +2,11 @@
 .vscode
 
 # Latex build files
-.aux
-.fdb_latexmk
-.fls
-.log
-.out
-.synctex.gz
-.toc
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.pdf
