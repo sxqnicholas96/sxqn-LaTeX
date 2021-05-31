@@ -1,0 +1,162 @@
+%!TEX root = ./Technical_Interview_CS.tex
+
+\documentclass[12pt, a4paper]{article}
+\usepackage{geometry}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{fancyvrb,xcolor}
+
+\newcommand{\code}[1]{\texttt{#1}}
+
+\definecolor{test}{gray}{0.93}
+
+\newenvironment{lcverbatim}
+ {\SaveVerbatim{cverb}}
+ {\endSaveVerbatim
+  \flushleft\fboxrule=0pt\fboxsep=.5em
+  \colorbox{test}{%
+    \makebox[\dimexpr\linewidth-2\fboxsep][l]{\BUseVerbatim{cverb}}%
+  }
+  \endflushleft
+}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\newcommand\Perm[2][^n]{\prescript{#1\mkern-2.5mu}{}P_{#2}}
+\newcommand\Comb[2][^n]{\prescript{#1\mkern-0.5mu}{}C_{#2}}
+
+\setlength{\parindent}{0pt} % Set paragraph indent to 0 spaces
+
+\graphicspath{./}
+\geometry{a4paper, margin=0.7in}
+
+\begin{document}
+\noindent
+
+\tableofcontents
+
+\pagebreak
+
+\addcontentsline{toc}{section}{Software Engineering Principles}
+\section*{Software Engineering Principles}
+
+\pagebreak
+\addcontentsline{toc}{section}{Concepts in Operating Systems}
+\section*{Concepts in Operating Systems}
+
+\pagebreak
+\addcontentsline{toc}{section}{Languages}
+\section*{Languages}
+\addcontentsline{toc}{subsection}{JavaScript}
+\subsection*{JavaScript}
+\subsubsection*{What is the \code{prototype} object in JavaScript}
+JavaScript is often described as a prototype-based language.
+Objects can have a \code{prototype} object, which acts as a template object that it inherits methods and properties from.
+In JavaScript, a link is made between the object instance and its prototype (\code{\_\_proto\_\_} property, derived from \code{prototype} property from the constructor)
+
+\subsubsection*{What are the primitive data types in JavaScript}
+There are 7 primitive data types: \code{string}, \code{number}, \code{bigint}, \code{undefined}, \code{boolean}, \code{symbol} and \code{null}.
+
+\subsubsection*{What are the keywords \code{async}/\code{await} and the \code{Promise} object used for}
+The \code{async} keyword is always used to define an asynchronous function, which would then always return a \code{Promise} object.\newline
+The \code{await} keyword can \textbf{only be used in defined, asynchronous functions}, makes JavaScript wait until that promise resolves, and then returns the result.
+\code{await} \textbf{only} suspends function execution in which it has been used.
+In the meantime, the JavaScript can handle other jobs like executing scripts or handle events etc.\newline
+The \code{Promise} object represents the eventual completion and failure of an asynchronous operation and its resulting value.
+A \code{Promise} can be in one of 3 states:
+\begin{itemize}
+    \item \code{pending} - the asynchronous action is pending resolution, neither fulfilled nor rejected
+    \item \code{fulfilled}/\code{resolved} - the asynchronous action has completed successfully
+    \item \code{rejected} - The operation has failed
+\end{itemize}
+
+\subsubsection*{Why are callbacks used extensively in JavaScript}
+Callbacks are used in JavaScript to execute code after an asynchronous action has resolved.
+
+\subsubsection*{What is Babel and what is its use in JavaScript projects}
+Babel is a JavaScript compiler toolchain that helps developers transpile JavaScript code into backwards-compatible versions of itself to accommodate older browsers and environments.
+This is because older browser versions often are unable to support newer versions of JavaScript.
+
+\subsubsection*{What is \code{Promise.all} and \code{Promise.race}}
+\code{Promise.all} accepts an array of promises, and attempts to fulfill all of them.
+Exits early if just 1 promise gets rejected.\newline
+\code{Promise.race} accepts an array of promises, but only returns the \code{Promise} that returns first.
+
+\subsubsection*{What is currying in JavaScript?}
+Currying is a technique of evaluating a function with multiple arguments, into a sequence of functional calls, each with a single arguments.\newline
+Currying works by natural closure, where the nested functions retain access to variables in higher order functions.
+Hence the innermost function have access to all variables.
+
+\subsubsection*{What is the concept of closures in JavaScript}
+The concept of closure refers to the combination of a function bundled together with references to its surrounding state or lexical environment, within which the function was declared.
+Whenever you create a function within another function, you have created a closure.
+In JavaScript, closures are created every time is created, at function creation time.
+\begin{lcverbatim}
+    function makeFunc() {
+            var name = 'Mozilla';
+            function displayName() {
+                    alert(name);
+                }
+            return displayName
+        }
+    var myFunc = makeFunc();
+    myFunc();
+\end{lcverbatim}
+
+As in the above code, the instance of displayName maintains a reference to its lexical environment, and hence is able to access the variable \code{name} in the outer function.
+
+% TODO
+\subsubsection*{Compare Global scope vs Local scope vs Function scoping vs Block-scoping}
+\textbf{Global scope} refers to variables declared outside all functions or curly braces.\newline
+\textbf{Local scope} refers to variables declared that is only accessible in a specific part of the code.
+\begin{itemize}
+    \item \textbf{Function scope} refers to lexical environment enclosed within a function.
+    \item \textbf{Block scope} refers to the lexical environment enclosed within a curly brace.
+\end{itemize}
+
+\subsubsection*{What does hoisting mean in JavaScript}
+Hoisting is a JavaScript mechanism where variables and function declarations are moved to the top of their scope before code execution.
+
+\subsubsection*{What is the \code{new} keyword in JavaScript for?}
+
+\subsubsection*{Difference between Class Expressions and Class Declarations}
+\begin{lcverbatim}
+class Rectangle {
+    constructor(height, width) {
+        this.height = height;
+        this.width = width;
+    }
+}
+\end{lcverbatim}
+
+
+\subsubsection*{Difference between \code{Object} and \code{Map}}
+
+\subsubsection*{Difference between \code{const}, \code{let} and \code{var}}
+
+\subsubsection*{What's the difference between function declarations, function expressions and arrow functions? In which contexts would you use each type?}
+https://mariusschulz.com/blog/function-definitions-in-javascript
+
+
+\pagebreak
+
+\addcontentsline{toc}{subsection}{C/C++}
+\subsection*{C/C++}
+
+
+\pagebreak
+\addcontentsline{toc}{section}{Frameworks}
+\section*{Frameworks}
+\subsection*{React}
+
+\end{document}
