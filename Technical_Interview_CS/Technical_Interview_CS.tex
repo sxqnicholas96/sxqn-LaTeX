@@ -53,6 +53,8 @@
 \pagebreak
 \addcontentsline{toc}{section}{Concepts in Operating Systems}
 \section*{Concepts in Operating Systems}
+\subsubsection*{What is the difference between a Task, Process and Threads?}
+
 
 \pagebreak
 \addcontentsline{toc}{section}{Languages}
@@ -102,15 +104,15 @@ The concept of closure refers to the combination of a function bundled together 
 Whenever you create a function within another function, you have created a closure.
 In JavaScript, closures are created every time is created, at function creation time.
 \begin{lcverbatim}
-    function makeFunc() {
-            var name = 'Mozilla';
-            function displayName() {
-                    alert(name);
-                }
-            return displayName
+function makeFunc() {
+    var name = 'Mozilla';
+    function displayName() {
+            alert(name);
         }
-    var myFunc = makeFunc();
-    myFunc();
+    return displayName
+}
+var myFunc = makeFunc();
+myFunc();
 \end{lcverbatim}
 
 As in the above code, the instance of displayName maintains a reference to its lexical environment, and hence is able to access the variable \code{name} in the outer function.
@@ -127,25 +129,92 @@ As in the above code, the instance of displayName maintains a reference to its l
 \subsubsection*{What does hoisting mean in JavaScript}
 Hoisting is a JavaScript mechanism where variables and function declarations are moved to the top of their scope before code execution.
 
-\subsubsection*{What is the \code{new} keyword in JavaScript for?}
-
 \subsubsection*{Difference between Class Expressions and Class Declarations}
 \begin{lcverbatim}
-class Rectangle {
-    constructor(height, width) {
-        this.height = height;
-        this.width = width;
+// Class declaration
+class Square {
+    constructor(length) {
+        this.length = length;
     }
 }
+// Class expressions
+let Square = class {          // unamed, Square.name = "Square"
+  constructor(length) {
+    this.length = length;
+  }
+};
+
+let Square = class Square2 {  // named, Square.name = "Square2"
+  constructor(length) {
+    this.length = length;
+  }
+};
 \end{lcverbatim}
 
+Both class expressions and declarations are not hoisted during compile time, unlike function declarations.
+
+\subsubsection*{What is the \code{new} keyword in JavaScript for?}
+The \code{new} keyword is used to create an instance of an object that has the constructor function.
+\begin{enumerate}
+    \item A new empty object is created.
+    \item The new object’s internal ‘Prototype’ property (\code{\_\_proto\_\_}) is set the same as the prototype of the constructing function.
+    \item The \code{this} variable is made to point to the newly created object. It binds the property which is declared with \code{this} keyword to the new object.
+    \item A newly created object is returned when the constructor function returns a non-primitive value (custom JavaScript object).
+          If the constructor function returns a primitive value, it will be ignored.
+          At the end of the function, ‘this’ is returned if there is no return statement in the function body.    
+\end{enumerate}
 
 \subsubsection*{Difference between \code{Object} and \code{Map}}
+\begin{itemize}
+  \item \textbf{Accidental Keys} - \code{Map} does not contain any keys by default, while an \code{Object} has a prototype (contains default keys)
+  \item \textbf{Key Types} - A \code{Map}'s keys can be any value, while the keys of an \code{Object} must be a \code{String} or \code{Symbol}
+  \item \textbf{Key Order} - Keys in \code{Map} ordered in the order of entry insertion, while keys in \code{Object} have arbitrary/unreliable ordering. 
+\end{itemize}
 
 \subsubsection*{Difference between \code{const}, \code{let} and \code{var}}
+\begin{itemize}
+  \item \code{var} is globally scoped when declared outside a function, and functionally scoped when declared within a function.\newline
+        \code{var} declarations are hoisted to the top, and will be initialised with a value of \code{undefined}
+  \item \code{const} and \code{let} is block scoped.\newline
+        \code{let} and \code{const} declarations are hoisted to the top, but will not be initialised.
+\end{itemize}
 
 \subsubsection*{What's the difference between function declarations, function expressions and arrow functions? In which contexts would you use each type?}
-https://mariusschulz.com/blog/function-definitions-in-javascript
+\begin{itemize}
+  \item \textbf{Function Declarations}
+  \begin{lcverbatim}
+  function add(a, b) {
+    return a + b;
+  }
+  \end{lcverbatim}
+  Each function declaration must be accompanied by its name and are hoisted.
+  \item \textbf{Function Expressions}
+  \begin{lcverbatim}
+  var add = function(a, b) { // unamed
+    return a + b;
+  };
+  \end{lcverbatim}
+  \begin{lcverbatim}
+  var add = function add(a, b) { // named
+    return a + b;
+  };
+  \end{lcverbatim}
+  Function expressions are not hoisted. 
+  The \code{var} declaration is hoisted, but is initialised with a value of \code{undefined}
+  \item \textbf{Arrow Functions}
+  \begin{lcverbatim}
+  var add = (a, b) => a + b;
+  \end{lcverbatim}
+  Arrow functions behave mostly like function expressions, and are not hoisted.
+  Arrow functions cannot be named, and lexically binds(inherits from its enclosing scope) the current \code{this} value.
+  Function declarations and function expressions, however, own their own \code{this} value.
+\end{itemize}
+
+\pagebreak
+
+\addcontentsline{toc}{subsection}{TypeScript}
+\subsection*{TypeScript}
+
 
 
 \pagebreak
