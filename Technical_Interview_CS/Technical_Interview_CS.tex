@@ -49,6 +49,16 @@
 
 \addcontentsline{toc}{section}{Software Engineering Principles}
 \section*{Software Engineering Principles}
+\subsubsection*{What are the SOLID principles?}
+\begin{enumerate}
+  \item Single Responsibility - A class should have only one responsibility, and hence only one reason to change.
+  \item Open/Closed - Classes should be open for extension, but closed for modification.
+  \item Liskov Substituition - if B is a class subtype of A, then we can replace all instances of B with A without disrupting the program.
+  \item Interface Segregation - Large interfaces should be split into smaller, focused chunks.
+  \item Dependency Inversion - Instead of high-level modules depending on low-level modules, both will depend on abstractions.
+\end{enumerate}
+
+Detailed explanations for each principle can reference \href{https://www.baeldung.com/solid-principles}{here at Baeldung}
 
 \pagebreak
 \addcontentsline{toc}{section}{Concepts in Operating Systems}
@@ -59,6 +69,10 @@
 \pagebreak
 \addcontentsline{toc}{section}{Languages}
 \section*{Languages}
+\addcontentsline{toc}{subsection}{C/C++}
+\subsection*{C/C++}
+
+\pagebreak
 \addcontentsline{toc}{subsection}{JavaScript}
 \subsection*{JavaScript}
 \subsubsection*{What is the \code{prototype} object in JavaScript}
@@ -212,18 +226,34 @@ The \code{new} keyword is used to create an instance of an object that has the c
 
 \pagebreak
 
+\addcontentsline{toc}{subsection}{Scala}
+\subsection*{Scala}
+
+\subsubsection*{Difference between \code{class} and \code{object}}
+A \code{class} definition is a template that we can use to create objects from.
+A class instance is the actual object created from the template.
+Scala provides the \code{object} keyword that allows us to create singleton objects directly.
+That is to say, an object declared using the \code{object} keyword can only have a single instance, or only instantiated once.
+
+\subsubsection*{What are implicit classes?}
+They are classes marked with the \code{implicit} keyword.
+This allows the class's primary constructor to be available for implicit conversions when the class in scope.\newline
+
+Implicit class declarations have the following restrictions:
+\begin{itemize}
+  \item They must be defined inside of another \code{trait}/\code{class}/\code{object}
+  \item Only one non-implicit argument is allowed in their constructor
+  \item The name of implicit class must not collide with other declarations within the same scope, and implies implicit classes cannot be case classes
+\end{itemize}
+
+
+\pagebreak
+
 \addcontentsline{toc}{subsection}{TypeScript}
 \subsection*{TypeScript}
 
-
-
 \pagebreak
 
-\addcontentsline{toc}{subsection}{C/C++}
-\subsection*{C/C++}
-
-
-\pagebreak
 \addcontentsline{toc}{section}{Frameworks}
 \section*{Frameworks}
 \subsection*{React}
