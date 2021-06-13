@@ -1,0 +1,121 @@
+%!TEX root = ./question_bank.tex
+
+\documentclass[12pt, a4paper]{article}
+\usepackage{geometry}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{fancyvrb,xcolor}
+
+\newcommand{\code}[1]{\texttt{#1}}
+
+\definecolor{test}{gray}{0.93}
+
+\newenvironment{lcverbatim}
+ {\SaveVerbatim{cverb}}
+ {\endSaveVerbatim
+  \flushleft\fboxrule=0pt\fboxsep=.5em
+  \colorbox{test}{%
+    \makebox[\dimexpr\linewidth-2\fboxsep][l]{\BUseVerbatim{cverb}}%
+  }
+  \endflushleft
+}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\newcommand\Perm[2][^n]{\prescript{#1\mkern-2.5mu}{}P_{#2}}
+\newcommand\Comb[2][^n]{\prescript{#1\mkern-0.5mu}{}C_{#2}}
+
+\setlength{\parindent}{0pt} % Set paragraph indent to 0 spaces
+
+\graphicspath{./}
+\geometry{a4paper, margin=0.7in}
+
+\begin{document}
+\noindent
+
+\tableofcontents
+
+\pagebreak
+
+\addcontentsline{toc}{subsection}{JavaScript}
+\subsection*{JavaScript}
+\subsubsection*{What is the \code{prototype} object in JavaScript}
+JavaScript is often described as a prototype-based language.
+Objects can have a \code{prototype} object, which acts as a template object that it inherits methods and properties from.
+In JavaScript, a link is made between the object instance and its prototype (\code{\_\_proto\_\_} property, derived from \code{prototype} property from the constructor)
+
+\subsubsection*{What are the primitive types in JavaScript}
+
+\subsubsection*{What is async, await and Promises}
+
+\subsubsection*{What is the difference between asynchronous and synchronous function in JavaScript}
+
+\subsubsection*{What is Babel? Why is it needed?}
+
+\subsubsection*{What is Promise.all and Promise.race}
+
+\subsubsection*{What is hoisting in JavaScript? What are its implications? }
+
+\url{https://www.w3schools.com/js/js_hoisting.asp}
+
+\url{https://www.freecodecamp.org/news/function-hoisting-hoisting-interview-questions-b6f91dbc2be8/}
+
+\subsubsection*{What's the difference between function declarations, function expressions and arrow functions? In which contexts would you use each type? }
+
+\url{https://mariusschulz.com/blog/function-definitions-in-javascript}
+
+
+\subsubsection*{What JS engines does Chrome, Safari, Firefox, Edge use respectively?}
+
+\subsubsection*{Difference between \code{const}, \code{let} and \code{var}}
+
+\pagebreak
+
+\addcontentsline{toc}{subsection}{CSS}
+\subsection*{CSS}
+\subsubsection*{CSS, SASS, LESS, CSS-in-JS}
+
+\subsubsection*{What is Critical CSS}
+
+\pagebreak
+
+\addcontentsline{toc}{subsection}{Docker}
+\subsection*{Docker}
+\subsubsection*{What's the difference between a docker container and a virtual machine}
+
+\subsubsection*{What is a docker repository and what is its use case}
+
+\pagebreak
+
+\addcontentsline{toc}{subsection}{TypeScript}
+\subsection*{TypeScript}
+\subsubsection*{What's the difference between using JavaScript and TypeScript in a project}
+
+\subsubsection*{Difference between \code{type} and \code{interface}}
+
+\subsubsection*{What are type assertions and when should you use them}
+
+\subsubsection*{What are some disadvantages of TypeScript}
+
+\subsubsection*{What are type generics used in TypeScript for}
+
+\subsubsection*{What is the difference between using \code{null} and {unknown}}
+
+
+
+
+
+
+
+
+\end{document}
