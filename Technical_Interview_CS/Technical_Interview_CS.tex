@@ -1,6 +1,9 @@
 %!TEX root = ./Technical_Interview_CS.tex
 
 \documentclass[12pt, a4paper]{article}
+\usepackage{listings} %code extracts
+\usepackage{xcolor} %custom colours
+\usepackage{mdframed} %nice frames
 \usepackage{geometry}
 \usepackage{mathtools}
 \usepackage{enumitem}
@@ -12,16 +15,38 @@
 
 \newcommand{\code}[1]{\texttt{#1}}
 
+\definecolor{light-gray}{gray}{0.95} %the shade of grey that stack exchange uses
+
 \definecolor{test}{gray}{0.93}
 
-\newenvironment{lcverbatim}
- {\SaveVerbatim{cverb}}
- {\endSaveVerbatim
-  \flushleft\fboxrule=0pt\fboxsep=.5em
-  \colorbox{test}{%
-    \makebox[\dimexpr\linewidth-2\fboxsep][l]{\BUseVerbatim{cverb}}%
-  }
-  \endflushleft
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstset{
+   language=JavaScript,
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
 }
 
 \hypersetup{
@@ -29,7 +54,7 @@
     citecolor=black,
     filecolor=black,
     linkcolor=black,
-    urlcolor=black
+    urlcolor=blue,
 }
 
 \newcommand\Perm[2][^n]{\prescript{#1\mkern-2.5mu}{}P_{#2}}
@@ -117,7 +142,8 @@ Hence the innermost function have access to all variables.
 The concept of closure refers to the combination of a function bundled together with references to its surrounding state or lexical environment, within which the function was declared.
 Whenever you create a function within another function, you have created a closure.
 In JavaScript, closures are created every time is created, at function creation time.
-\begin{lcverbatim}
+\begin{mdframed}[backgroundcolor=light-gray, roundcorner=10pt,leftmargin=1, rightmargin=1, innerleftmargin=20, innertopmargin=5,innerbottommargin=5, outerlinewidth=1, linecolor=light-gray]
+\begin{lstlisting}[language=JavaScript]
 function makeFunc() {
     var name = 'Mozilla';
     function displayName() {
@@ -127,7 +153,10 @@ function makeFunc() {
 }
 var myFunc = makeFunc();
 myFunc();
-\end{lcverbatim}
+
+\end{lstlisting}
+\end{mdframed}
+
 
 As in the above code, the instance of displayName maintains a reference to its lexical environment, and hence is able to access the variable \code{name} in the outer function.
 
@@ -144,7 +173,8 @@ As in the above code, the instance of displayName maintains a reference to its l
 Hoisting is a JavaScript mechanism where variables and function declarations are moved to the top of their scope before code execution.
 
 \subsubsection*{Difference between Class Expressions and Class Declarations}
-\begin{lcverbatim}
+\begin{mdframed}[backgroundcolor=light-gray, roundcorner=10pt,leftmargin=1, rightmargin=1, innerleftmargin=20, innertopmargin=5,innerbottommargin=5, outerlinewidth=1, linecolor=light-gray]
+\begin{lstlisting}[language=JavaScript]
 // Class declaration
 class Square {
     constructor(length) {
@@ -163,7 +193,8 @@ let Square = class Square2 {  // named, Square.name = "Square2"
     this.length = length;
   }
 };
-\end{lcverbatim}
+\end{lstlisting}
+\end{mdframed}
 
 Both class expressions and declarations are not hoisted during compile time, unlike function declarations.
 
@@ -196,29 +227,37 @@ The \code{new} keyword is used to create an instance of an object that has the c
 \subsubsection*{What's the difference between function declarations, function expressions and arrow functions? In which contexts would you use each type?}
 \begin{itemize}
   \item \textbf{Function Declarations}
-  \begin{lcverbatim}
+  \begin{mdframed}[backgroundcolor=light-gray, roundcorner=10pt,leftmargin=1, rightmargin=1, innerleftmargin=20, innertopmargin=5,innerbottommargin=5, outerlinewidth=1, linecolor=light-gray]
+  \begin{lstlisting}[language=JavaScript]
   function add(a, b) {
     return a + b;
   }
-  \end{lcverbatim}
+  \end{lstlisting}
+  \end{mdframed}
   Each function declaration must be accompanied by its name and are hoisted.
   \item \textbf{Function Expressions}
-  \begin{lcverbatim}
+  \begin{mdframed}[backgroundcolor=light-gray, roundcorner=10pt,leftmargin=1, rightmargin=1, innerleftmargin=20, innertopmargin=5,innerbottommargin=5, outerlinewidth=1, linecolor=light-gray]
+  \begin{lstlisting}[language=JavaScript]
   var add = function(a, b) { // unamed
     return a + b;
   };
-  \end{lcverbatim}
-  \begin{lcverbatim}
+  \end{lstlisting}
+  \end{mdframed}
+  \begin{mdframed}[backgroundcolor=light-gray, roundcorner=10pt,leftmargin=1, rightmargin=1, innerleftmargin=20, innertopmargin=5,innerbottommargin=5, outerlinewidth=1, linecolor=light-gray]
+  \begin{lstlisting}[language=JavaScript]
   var add = function add(a, b) { // named
     return a + b;
   };
-  \end{lcverbatim}
+  \end{lstlisting}
+  \end{mdframed}
   Function expressions are not hoisted. 
   The \code{var} declaration is hoisted, but is initialised with a value of \code{undefined}
   \item \textbf{Arrow Functions}
-  \begin{lcverbatim}
+  \begin{mdframed}[backgroundcolor=light-gray, roundcorner=10pt,leftmargin=1, rightmargin=1, innerleftmargin=20, innertopmargin=5,innerbottommargin=5, outerlinewidth=1, linecolor=light-gray]
+  \begin{lstlisting}[language=JavaScript]
   var add = (a, b) => a + b;
-  \end{lcverbatim}
+  \end{lstlisting}
+  \end{mdframed}
   Arrow functions behave mostly like function expressions, and are not hoisted.
   Arrow functions cannot be named, and lexically binds(inherits from its enclosing scope) the current \code{this} value.
   Function declarations and function expressions, however, own their own \code{this} value.
@@ -229,17 +268,33 @@ The \code{new} keyword is used to create an instance of an object that has the c
 \addcontentsline{toc}{subsection}{TypeScript}
 \subsection*{TypeScript}
 
-\subsubsection*{What's the difference between using JavaScript and TypeScript in a project}
+\subsubsection*{What's the difference between JavaScript and TypeScript}
+TypeScript is a superset of vanilla JavaScript, providing additional features such as static typing (type-checking at compile-time) and is strongly typed.
+TypeScript is mostly considered to be a programming language, that eventually compiles to vanilla JavaScript.\newline
+JavaScript is dynamically typed and is mostly considered to be scripting language that has to be interpreted on the fly by JavaScript engines.
 
-\subsubsection*{Difference between \code{type} and \code{interface}}
+\subsubsection*{Difference between \code{type} and \code{interface} declarations in TypeScript}
+\code{type} declarations cannot be "re-opened" to add new properties vs an \code{interface} which is always extendable.
+\href{https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#differences-between-type-aliases-and-interfaces}{See here}
 
 \subsubsection*{What are type assertions and when should you use them}
+Type assertions can be used when the developer is confident of knowing more about a value then TypeScript.
+It is a way of telling the TypeScript compiler, "trust me, I know what I'm doing", and TypeScript assumes that you, the programmer have performed any special checks you need.
+Type assertions have 2 forms, the \code{as}-syntax and the "angle-bracket" syntax.
 
-\subsubsection*{What are some disadvantages of TypeScript}
+Usage of type assertions is highly discouraged in code.
+Responsibility of checking types should be given to the TypeScript compiler as much as possible.
+
+\subsubsection*{What are some disadvantages of using Javascript over TypeScript}
+It takes some time to compile TypeScript code and check type errors, while JavaScript code can be immediately interpreted.
 
 \subsubsection*{What are type generics used in TypeScript for}
+Type generics allow us to create reusable types and interfaces.
+This is especially useful when different objects share very similar attributes, we can simply declare an interface with a generic type to describe them all.
 
-\subsubsection*{What is the difference between using \code{null} and {unknown}}
+\subsubsection*{What is the difference between using \code{any} and \code{unknown}}
+\code{unknown} is much less permissive than \code{any}, and is considered the type-safe counterpart of \code{any}.
+This is enforced by the TypeScript compiler, where no operations are permitted without first asserting and narrowing an \code{unknown} variable to a more specific type.
 
 \pagebreak
 
@@ -266,25 +321,34 @@ Implicit class declarations have the following restrictions:
 \pagebreak
 
 \addcontentsline{toc}{section}{Database}
-\section*{Database}
-\subsubsection*{What's the difference between a docker container and a virtual machine}
-
-\subsubsection*{What is a docker repository and what is its use case}
-
-
 
 \pagebreak
 
 \addcontentsline{toc}{section}{Docker}
 \section*{Docker}
 \subsubsection*{What's the difference between a docker container and a virtual machine}
+A docker container runs in the same operating system as the host OS, while a virtual machine runs on a separate OS.
+Essentially, a container is just a set of processes that are isolated from the rest of the system, running from a distinct image that provides all files necessary to support the processes.
+To isolate containers, docker uses \code{namespaces}. 
+\code{namespaces} provide a layer of isolation, with each container running in a separate namespace and its access is limited to that namespace.
+
+Under VMs, computing hardware resources are virtualised and accesses to computing resources are managed by the VM software.
 
 \subsubsection*{What is a docker repository and what is its use case}
+Similar to Github repositories where it is used to share code, Docker repositories are used to share docker images.
+This is useful when we want to ensure consistency across development, staging and production environments.
 
 \pagebreak
 
 \addcontentsline{toc}{section}{Frameworks}
 \section*{Frameworks}
 \subsection*{React}
+\subsubsection*{What is the React Lifecycle}
+\subsubsection*{What is the advantage of using React Hooks vs React Class Components?}
+\subsubsection*{What is prop drilling? How to prevent prop drilling?}
+\subsubsection*{How would you faciliate communications between components in React?}
+\subsubsection*{What a certain indicators that a global state management container like Redux would be needed in a React application?}
+\subsubsection*{How to solve Redux Boilerplate code?}
+\subsubsection*{Why does React maintain a Virtual DOM and how is it used?}
 
 \end{document}

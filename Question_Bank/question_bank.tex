@@ -47,6 +47,8 @@
 
 \pagebreak
 
+\addcontentsline{toc}{section}{Languages}
+\section*{Languages}
 \addcontentsline{toc}{subsection}{JavaScript}
 \subsection*{JavaScript}
 \subsubsection*{What is the \code{prototype} object in JavaScript}
@@ -54,30 +56,145 @@ JavaScript is often described as a prototype-based language.
 Objects can have a \code{prototype} object, which acts as a template object that it inherits methods and properties from.
 In JavaScript, a link is made between the object instance and its prototype (\code{\_\_proto\_\_} property, derived from \code{prototype} property from the constructor)
 
-\subsubsection*{What are the primitive types in JavaScript}
+\subsubsection*{What are the primitive data types in JavaScript}
+There are 7 primitive data types: \code{string}, \code{number}, \code{bigint}, \code{undefined}, \code{boolean}, \code{symbol} and \code{null}.
 
-\subsubsection*{What is async, await and Promises}
+\subsubsection*{What are the keywords \code{async}/\code{await} and the \code{Promise} object used for}
+The \code{async} keyword is always used to define an asynchronous function, which would then always return a \code{Promise} object.\newline
+The \code{await} keyword can \textbf{only be used in defined, asynchronous functions}, makes JavaScript wait until that promise resolves, and then returns the result.
+\code{await} \textbf{only} suspends function execution in which it has been used.
+In the meantime, the JavaScript can handle other jobs like executing scripts or handle events etc.\newline
+The \code{Promise} object represents the eventual completion and failure of an asynchronous operation and its resulting value.
+A \code{Promise} can be in one of 3 states:
+\begin{itemize}
+    \item \code{pending} - the asynchronous action is pending resolution, neither fulfilled nor rejected
+    \item \code{fulfilled}/\code{resolved} - the asynchronous action has completed successfully
+    \item \code{rejected} - The operation has failed
+\end{itemize}
 
-\subsubsection*{What is the difference between asynchronous and synchronous function in JavaScript}
+\subsubsection*{What is Babel and what is its use in JavaScript projects}
+Babel is a JavaScript compiler toolchain that helps developers transpile JavaScript code into backwards-compatible versions of itself to accommodate older browsers and environments.
+This is because older browser versions often are unable to support newer versions of JavaScript.
 
-\subsubsection*{What is Babel? Why is it needed?}
+\subsubsection*{What is \code{Promise.all} and \code{Promise.race}}
+\code{Promise.all} accepts an array of promises, and attempts to fulfill all of them.
+Exits early if just 1 promise gets rejected.\newline
+\code{Promise.race} accepts an array of promises, but only returns the \code{Promise} that returns first.
 
-\subsubsection*{What is Promise.all and Promise.race}
+\pagebreak
 
-\subsubsection*{What is hoisting in JavaScript? What are its implications? }
+\addcontentsline{toc}{subsection}{Advanced JavaScript}
+\section*{Advanced JavaScript}
 
-\url{https://www.w3schools.com/js/js_hoisting.asp}
+\subsubsection*{What is currying in JavaScript?}
+Currying is a technique of evaluating a function with multiple arguments, into a sequence of functional calls, each with a single arguments.\newline
+Currying works by natural closure, where the nested functions retain access to variables in higher order functions.
+Hence the innermost function have access to all variables.
 
-\url{https://www.freecodecamp.org/news/function-hoisting-hoisting-interview-questions-b6f91dbc2be8/}
+\subsubsection*{What is the concept of closures in JavaScript}
+The concept of closure refers to the combination of a function bundled together with references to its surrounding state or lexical environment, within which the function was declared.
+Whenever you create a function within another function, you have created a closure.
+In JavaScript, closures are created every time is created, at function creation time.
+\begin{lcverbatim}
+function makeFunc() {
+    var name = 'Mozilla';
+    function displayName() {
+            alert(name);
+        }
+    return displayName
+}
+var myFunc = makeFunc();
+myFunc();
+\end{lcverbatim}
 
-\subsubsection*{What's the difference between function declarations, function expressions and arrow functions? In which contexts would you use each type? }
+As in the above code, the instance of displayName maintains a reference to its lexical environment, and hence is able to access the variable \code{name} in the outer function.
 
-\url{https://mariusschulz.com/blog/function-definitions-in-javascript}
+% TODO
+\subsubsection*{Compare Global scope vs Local scope vs Function scoping vs Block-scoping}
+\textbf{Global scope} refers to variables declared outside all functions or curly braces.\newline
+\textbf{Local scope} refers to variables declared that is only accessible in a specific part of the code.
+\begin{itemize}
+    \item \textbf{Function scope} refers to lexical environment enclosed within a function.
+    \item \textbf{Block scope} refers to the lexical environment enclosed within a curly brace.
+\end{itemize}
 
+\subsubsection*{What does hoisting mean in JavaScript}
+Hoisting is a JavaScript mechanism where variables and function declarations are moved to the top of their scope before code execution.
 
-\subsubsection*{What JS engines does Chrome, Safari, Firefox, Edge use respectively?}
+\subsubsection*{Difference between Class Expressions and Class Declarations}
+\begin{lcverbatim}
+// Class declaration
+class Square {
+    constructor(length) {
+        this.length = length;
+    }
+}
+// Class expressions
+let Square = class {          // unamed, Square.name = "Square"
+  constructor(length) {
+    this.length = length;
+  }
+};
+
+let Square = class Square2 {  // named, Square.name = "Square2"
+  constructor(length) {
+    this.length = length;
+  }
+};
+\end{lcverbatim}
+
+Both class expressions and declarations are not hoisted during compile time, unlike function declarations.
+
+\subsubsection*{What is the \code{new} keyword in JavaScript for?}
+The \code{new} keyword is used to create an instance of an object that has the constructor function.
+\begin{enumerate}
+    \item A new empty object is created.
+    \item The new object’s internal ‘Prototype’ property (\code{\_\_proto\_\_}) is set the same as the prototype of the constructing function.
+    \item The \code{this} variable is made to point to the newly created object. It binds the property which is declared with \code{this} keyword to the new object.
+    \item A newly created object is returned when the constructor function returns a non-primitive value (custom JavaScript object).
+          If the constructor function returns a primitive value, it will be ignored.
+          At the end of the function, ‘this’ is returned if there is no return statement in the function body.    
+\end{enumerate}
 
 \subsubsection*{Difference between \code{const}, \code{let} and \code{var}}
+\begin{itemize}
+  \item \code{var} is globally scoped when declared outside a function, and functionally scoped when declared within a function.\newline
+        \code{var} declarations are hoisted to the top, and will be initialised with a value of \code{undefined}
+  \item \code{const} and \code{let} is block scoped.\newline
+        \code{let} and \code{const} declarations are hoisted to the top, but will not be initialised.
+\end{itemize}
+
+\subsubsection*{What's the difference between function declarations, function expressions and arrow functions? In which contexts would you use each type?}
+\begin{itemize}
+  \item \textbf{Function Declarations}
+  \begin{lcverbatim}
+  function add(a, b) {
+    return a + b;
+  }
+  \end{lcverbatim}
+  Each function declaration must be accompanied by its name and are hoisted.
+  \item \textbf{Function Expressions}
+  \begin{lcverbatim}
+  var add = function(a, b) { // unamed
+    return a + b;
+  };
+  \end{lcverbatim}
+  \begin{lcverbatim}
+  var add = function add(a, b) { // named
+    return a + b;
+  };
+  \end{lcverbatim}
+  Function expressions are not hoisted. 
+  The \code{var} declaration is hoisted, but is initialised with a value of \code{undefined}
+  \item \textbf{Arrow Functions}
+  \begin{lcverbatim}
+  var add = (a, b) => a + b;
+  \end{lcverbatim}
+  Arrow functions behave mostly like function expressions, and are not hoisted.
+  Arrow functions cannot be named, and lexically binds(inherits from its enclosing scope) the current \code{this} value.
+  Function declarations and function expressions, however, own their own \code{this} value.
+\end{itemize}
+
 
 \pagebreak
 
@@ -94,28 +211,5 @@ In JavaScript, a link is made between the object instance and its prototype (\co
 \subsubsection*{What's the difference between a docker container and a virtual machine}
 
 \subsubsection*{What is a docker repository and what is its use case}
-
-\pagebreak
-
-\addcontentsline{toc}{subsection}{TypeScript}
-\subsection*{TypeScript}
-\subsubsection*{What's the difference between using JavaScript and TypeScript in a project}
-
-\subsubsection*{Difference between \code{type} and \code{interface}}
-
-\subsubsection*{What are type assertions and when should you use them}
-
-\subsubsection*{What are some disadvantages of TypeScript}
-
-\subsubsection*{What are type generics used in TypeScript for}
-
-\subsubsection*{What is the difference between using \code{null} and {unknown}}
-
-
-
-
-
-
-
 
 \end{document}
