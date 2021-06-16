@@ -342,11 +342,33 @@ This is useful when we want to ensure consistency across development, staging an
 
 \addcontentsline{toc}{section}{Frameworks}
 \section*{Frameworks}
+\addcontentsline{toc}{subsection}{React}
 \subsection*{React}
 \subsubsection*{What is the React Lifecycle}
-\subsubsection*{What is the advantage of using React Hooks vs React Class Components?}
+Each React component you build has a lifecycle which you can monitor and manipulate during its three main phases:
+\begin{itemize}
+  \item \textbf{Mounting} refers to when the component has to be rendered for the first time, and React has to build the initial DOM for the component.
+  \item \textbf{Updating} refers to when the component is updating(e.g. component state update, \code{props} change)
+  \item \textbf{Unmounting} refers to when the component is to be removed from the React DOM, and corresponding cleanup code is called
+\end{itemize}
+
+More on what methods are called during each phase \href{https://www.w3schools.com/react/react_lifecycle.asp}{here}
+
+\subsubsection*{What is the advantage of using React Hooks w/ React Functional Components vs React Class Components?}
+\begin{itemize}
+  \item With React Hooks, stateful logic is decoupled from UI and allows us to reuse the logic across multiple React components, by refactoring out hook logic into a separate module.
+  \item React Hooks avoids having to use method bindings and the \code{this} keyword, which can be confusing for developers.
+  \item React Hooks can help to simplify and organise code to improve readability, while Class Components often become very complex and difficult to simplify.
+\end{itemize}
+
 \subsubsection*{What is prop drilling? How to prevent prop drilling?}
+Prop drilling is when \code{props} are passed through layers of components that do not need the data, eventually reaching the component that actually uses it.
+This is not ideal, as it would imply everytime we add/remove a prop needed by the targeted component, we would need to modify code for the intermediate components as well.
+
+To prevent prop drilling, can use \href{https://reactjs.org/docs/context.html}{React Context} or any state management container library such as \href{https://redux.js.org/introduction/getting-started}{Redux} or \href{https://mobx.js.org/README.html}{Mobx}.
+
 \subsubsection*{How would you faciliate communications between components in React?}
+
 \subsubsection*{What a certain indicators that a global state management container like Redux would be needed in a React application?}
 \subsubsection*{How to solve Redux Boilerplate code?}
 \subsubsection*{Why does React maintain a Virtual DOM and how is it used?}
