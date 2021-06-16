@@ -365,12 +365,33 @@ More on what methods are called during each phase \href{https://www.w3schools.co
 Prop drilling is when \code{props} are passed through layers of components that do not need the data, eventually reaching the component that actually uses it.
 This is not ideal, as it would imply everytime we add/remove a prop needed by the targeted component, we would need to modify code for the intermediate components as well.
 
-To prevent prop drilling, can use \href{https://reactjs.org/docs/context.html}{React Context} or any state management container library such as \href{https://redux.js.org/introduction/getting-started}{Redux} or \href{https://mobx.js.org/README.html}{Mobx}.
+To prevent prop drilling, can use \href{https://reactjs.org/docs/context.html}{React Context} or any state management container library such as \href{https://redux.js.org/introduction/getting-started}{Redux} or \href{https://mobx.js.org/README.html}{MobX}.
 
 \subsubsection*{How would you faciliate communications between components in React?}
+Communications here mean a triggered function causes an update state in another component (e.g. child, sibling or parent), which then triggers an UI update.
+
+This can be done by:
+\begin{itemize}
+  \item As a parent component, pass \code{props} to a child component.
+        A change in props would then trigger an update in the child component.
+  \item \href{https://reactjs.org/docs/context.html}{React Context} can be used to faciliate communication between components, using the \code{Provider} \& \code{Consumer} React components.
+  \item State management container libraries \href{https://redux.js.org/introduction/getting-started}{Redux} or \href{https://mobx.js.org/README.html}{MobX}.
+\end{itemize}
 
 \subsubsection*{What a certain indicators that a global state management container like Redux would be needed in a React application?}
-\subsubsection*{How to solve Redux Boilerplate code?}
+While Redux is useful, it can be cumbersome and inefficient for development in smaller applications.
+
+Redux is most useful when:
+\begin{itemize}
+  \item You have large amounts of application state that are needed in many places in the app
+  \item The app state is updated frequently
+  \item The logic to update that state may be complex
+  \item The app has a medium or large-sized codebase, and might be worked on by many people
+  \item You need to see how that state is being updated over time
+\end{itemize}
+
+Reference: \url{https://redux.js.org/faq/general#when-should-i-use-redux}
+
 \subsubsection*{Why does React maintain a Virtual DOM and how is it used?}
 
 \end{document}
