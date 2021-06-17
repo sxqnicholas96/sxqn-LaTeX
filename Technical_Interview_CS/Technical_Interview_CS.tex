@@ -404,6 +404,22 @@ Redux is most useful when:
 
 Reference: \url{https://redux.js.org/faq/general#when-should-i-use-redux}
 
+\subsubsection*{Why is Reconciliation aka diffing algorithm in React?}
+\href{https://reactjs.org/docs/reconciliation.html}{Reconciliation} is how React reconciles differences between the old browser DOM tree and the desired browser DOM tree to be rendered to the user.
+Traditionally, state-of-art algorithms have a complexity of \(O(n^{3})\), but the diffing algorithm has been heavily optimised by the React team and runs at a complexity of \(O(n)\) heuristically.
+
 \subsubsection*{Why does React maintain a Virtual DOM and how is it used?}
+The Virtual DOM is a virtual representation of the actual browser DOM that is presented as a view in users' browsers.
+It is used to optimise updates to the browser's DOM for React applications. 
+In a React App, 2 Virtual DOM trees are maintained, one representing the old state, and the other representing the updated state that will eventually be used to update the actual browser DOM.
+
+When new elements are added to a UI due to state changes, a new virtual DOM tree is created to represent the updated UI.
+This newly created Virtual DOM is then compared with the old Virtual DOM through \href{https://reactjs.org/docs/reconciliation.html}{Reconciliation}, which also outputs the elements and operations to update the browser DOM to display the latest, desired UI.
+This is far more efficient than modifying the browser DOM each time an element is added.
+
+React also follows a batch update mechanism, where updates are only sent to the real DOM in batches, instead of sending everytime a state change has been detected.
+This also significantly reduces the amount of time spent having to repaint UI, which is mainly the bottleneck of updating/re-rendering UI.
+
+Reference: \url{https://programmingwithmosh.com/react/react-virtual-dom-explained/}
 
 \end{document}
