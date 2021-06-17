@@ -72,8 +72,11 @@
 
 \pagebreak
 
-\section*{Software Engineering Principles}
+\section*{Software Engineering}
 \addcontentsline{toc}{section}{Software Engineering Principles}
+
+\subsection*{Object-Oriented Programming (OOP)}
+\addcontentsline{toc}{subsection}{Object-Oriented Programming (OOP)}
 
 \subsubsection*{What are the SOLID principles?}
 \begin{enumerate}
@@ -326,11 +329,37 @@ Implicit class declarations have the following restrictions:
 
 \section*{Database}
 \addcontentsline{toc}{section}{Database}
+\subsubsection*{What are the ACID properties of transactions?}
+\begin{itemize}
+  \item \textbf{Atomicity} All changes to data in a transaction are performed as if they are a single operation.
+        All intended changes are performed, or none of them are.
+  \item \textbf{Consistency} Execution of a transaction in isolation preseves the consistency of data in the database.
+  \item \textbf{Isolation} Execution of a transaction is isolated from the effects of other transactions in concurrent execution.
+  \item \textbf{Durability} Effects of a committed transaction persist even in the presence of system failures.
+\end{itemize}
+
 \subsubsection*{What's the difference between NoSQL and SQL databases? What is the difference in use case?}
+\begin{itemize}
+  \item SQL databases are relational and enforces a strict schema that describes relationships between different data entities and is ACID-compliant.
+        NoSQL databases are non-relational and do not enforce relationships between entities.
+  \item SQL uses the SQL query language and must have a predefined schema while NoSQL databases have dynamic schemas to store unstructured data.
+  \item SQL databases are vertically scalable, NoSQL are horizontally scalable.
+  \item SQL databases are table based, while NoSQL databases are document, key-value, graph or wide-column stores.
+  \item SQL databases are better for multi-row transactions, NoSQL are better for unstructured data like documents or JSON.
+\end{itemize}
+
+Reference: \url{https://www.xplenty.com/blog/the-sql-vs-nosql-difference/}
 
 \subsubsection*{What is a primary key for?}
+Since primary keys uniquely identifies a row in a database table, it is usually used to index tables.
 
 \subsubsection*{What is a composite primary key used for?}
+Composite primary keys are usually used to express many-to-many relationships or weak entity sets.
+
+\subsubsection*{What is database normalization?}
+Normalization is a process of organizing data in a database to avoid data redundancy, insertion anomaly, update anomaly and deletion anomaly.
+
+Some examples of normal forms are 1NF, 2NF, 3NF BCNF.
 
 \pagebreak
 
